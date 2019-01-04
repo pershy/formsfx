@@ -403,6 +403,25 @@ public abstract class Field<F extends Field<F>> extends Element<F> implements Fo
         return new SingleSelectionField<>(new SimpleListProperty<>(itemsBinding.getValue()), itemsBinding.indexOf(selectionBinding.getValue())).bind(itemsBinding, selectionBinding);
     }
 
+    public static <T> SingleSelectionField<T> ofSingleSelectionType(ObservableList<T> itemsBinding, ObjectProperty<T> selectionBinding) {
+        return new SingleSelectionField<>(new SimpleListProperty<>(itemsBinding), itemsBinding.indexOf(selectionBinding.getValue())).bind(new SimpleListProperty<>(itemsBinding), selectionBinding);
+    }
+
+    public static <T> SingleSelectionField<T> ofSingleSelectionTypeX(ListProperty<T> itemsBinding, ObjectProperty<T> selectionBinding) {
+        SingleSelectionField<T> tSingleSelectionField = new SingleSelectionField<>(itemsBinding, itemsBinding.indexOf(selectionBinding.getValue()));
+        tSingleSelectionField.bind(selectionBinding);
+        return tSingleSelectionField;
+    }
+
+
+    public static <T> SingleSelectionField<T> ofSingleSelectionTypeY(ListProperty<T> itemsBinding, ObjectProperty<T> selectionBinding) {
+        SimpleListProperty<T> ts = new SimpleListProperty<>(itemsBinding.getValue());
+        SingleSelectionField<T> tSingleSelectionField = new SingleSelectionField<>(ts, itemsBinding.indexOf(selectionBinding.getValue())).bind(itemsBinding, selectionBinding);
+//        SingleSelectionField<T> tSingleSelectionField = new SingleSelectionField<>(itemsBinding, itemsBinding.indexOf(selectionBinding.getValue()));
+//        tSingleSelectionField.bind(selectionBinding);
+        return tSingleSelectionField;
+    }
+
     /**
      * Creates a new {@link DateField} with given default value
      *

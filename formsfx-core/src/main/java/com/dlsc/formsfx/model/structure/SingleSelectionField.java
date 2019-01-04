@@ -92,8 +92,8 @@ public class SingleSelectionField<V> extends SelectionField<V, SingleSelectionFi
         // with the new list of items.
 
         items.addListener((observable, oldValue, newValue) -> {
-            this.selection.setValue(null);
-            persistentSelection.setValue(null);
+//            this.selection.setValue(null);
+//            persistentSelection.setValue(null);
         });
 
         renderer = new SimpleComboBoxControl<>();
@@ -202,6 +202,11 @@ public class SingleSelectionField<V> extends SelectionField<V, SingleSelectionFi
 
         return this;
     }
+
+	public SingleSelectionField<V> bind(ObjectProperty<V> selectionBinding) {
+		selection.bindBidirectional(selectionBinding);
+		return this;
+	}
 
     /**
      * Unbinds the given items and selection property with the corresponding
